@@ -1,73 +1,173 @@
-Student Management System
+🎓 Student Management System
 
-Student Management System using JPA + Hibernate + MySQL.
+<p align="center">
+  <b>A clean, console-based CRUD application built with Java, JPA, Hibernate, Maven, and MySQL.</b>
+</p>
 
-Project Description
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-17-orange?style=for-the-badge&logo=openjdk" alt="Java 17">
+  <img src="https://img.shields.io/badge/JPA-Jakarta%20Persistence-blue?style=for-the-badge" alt="JPA">
+  <img src="https://img.shields.io/badge/Hibernate-6.6.36-59666C?style=for-the-badge&logo=hibernate" alt="Hibernate">
+  <img src="https://img.shields.io/badge/MySQL-8.x-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
+  <img src="https://img.shields.io/badge/Maven-3.x-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white" alt="Maven">
+</p>
 
-This project is a console-based Student Management System developed using Java, Maven, JPA (Jakarta Persistence), Hibernate, and MySQL.
+📌 Overview
 
-The application performs the following CRUD operations:
+Student Management System is a Java-based console application developed to demonstrate database persistence using Jakarta Persistence (JPA) with Hibernate and MySQL.
 
-Create – Add a new student
+The application provides a simple menu-driven interface for managing student records through complete CRUD operations:
 
-Read – View student details by ID
+➕ Create — Add a new student
 
-Update – Update student details
+🔍 Read — View student details by ID
 
-Delete – Delete a student by ID
+✏️ Update — Update course and phone number
 
-Technologies Used
+🗑️ Delete — Delete a student by ID
+
+🚪 Exit — Close the application
+
+This project demonstrates how a Java application communicates with a relational database using JPA's EntityManager and transaction management.
+
+✨ Features
+
+Menu-driven console interface
+
+Complete CRUD functionality
+
+Automatic Student ID generation
+
+JPA entity mapping using annotations
+
+Hibernate as the JPA persistence provider
+
+MySQL database integration
+
+Transaction management using EntityTransaction
+
+Automatic database table creation/update through Hibernate
+
+Maven dependency management
+
+Clean separation between entity, DAO, utility, and application layers
+
+🛠️ Tech Stack
+
+Technology
+
+Purpose
 
 Java 17
 
+Application development
+
 Maven
+
+Build and dependency management
 
 Jakarta Persistence (JPA)
 
+Persistence API
+
 Hibernate ORM
+
+JPA implementation / ORM framework
 
 MySQL
 
+Relational database
+
 MySQL Workbench
+
+Database verification
 
 EntityManager
 
+Database operations
+
 Transactions
 
-Step-by-Step Process
+Data consistency
 
-1. Project Structure
+📁 Project Structure
 
-Create the Maven project and organize the Java source files and persistence configuration inside the required folders.
-
-Student-Management-System
+Student-Management-System/
 │
 ├── .mvn/
+│   ├── jvm.config
+│   └── maven.config
 │
 ├── src/
 │   ├── main/
 │   │   ├── java/
-│   │   │   └── com/studentmanagement/
-│   │   │       ├── App.java
-│   │   │       ├── JPAUtil.java
-│   │   │       ├── Student.java
-│   │   │       └── StudentDAO.java
+│   │   │   └── com/
+│   │   │       └── studentmanagement/
+│   │   │           ├── App.java
+│   │   │           ├── JPAUtil.java
+│   │   │           ├── Student.java
+│   │   │           └── StudentDAO.java
 │   │   │
 │   │   └── resources/
 │   │       └── META-INF/
 │   │           └── persistence.xml
 │   │
 │   └── test/
+│       └── java/
+│           └── com/
+│               └── studentmanagement/
+│                   └── AppTest.java
 │
 ├── .gitignore
 ├── pom.xml
 └── README.md
 
-2. Maven Dependencies (pom.xml)
+🏗️ Application Architecture
 
-Add the required Java, Hibernate, MySQL Connector/J, and JUnit dependencies in pom.xml.
+The application follows a simple layered structure:
 
-The main dependencies used are:
+┌───────────────────────────┐
+│          App.java         │
+│   Console / User Input    │
+└─────────────┬─────────────┘
+              │
+              ▼
+┌───────────────────────────┐
+│      StudentDAO.java      │
+│       CRUD Operations     │
+└─────────────┬─────────────┘
+              │
+              ▼
+┌───────────────────────────┐
+│       EntityManager       │
+│      JPA Persistence      │
+└─────────────┬─────────────┘
+              │
+              ▼
+┌───────────────────────────┐
+│     Hibernate ORM         │
+│  JPA Persistence Provider │
+└─────────────┬─────────────┘
+              │
+              ▼
+┌───────────────────────────┐
+│       MySQL Database      │
+│     student_management    │
+└───────────────────────────┘
+
+📚 Step-by-Step Implementation
+
+1. Create the Maven Project
+
+Create a Maven project using Java 17 with the standard Maven directory structure.
+
+The project uses pom.xml to manage dependencies and build configuration.
+
+2. Add Maven Dependencies
+
+The required libraries are added to pom.xml.
+
+Main dependencies
 
 Hibernate ORM
 
@@ -75,33 +175,41 @@ MySQL Connector/J
 
 JUnit
 
-Maven downloads the required libraries automatically.
+Maven automatically downloads and manages these dependencies.
 
-3. Student Entity (Student.java)
+3. Create the Student Entity
 
-Create Student.java to represent the student table and define the Student ID, Name, Email, Course, and Phone Number fields.
+Student.java represents a student record in the database.
 
-The class is marked with @Entity so Hibernate maps it to a database table.
+The entity contains:
 
-The Student ID is generated automatically using:
+Student ID
+Student Name
+Email
+Course
+Phone Number
 
+The class uses JPA annotations such as:
+
+@Entity
+@Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-4. JPA Utility (JPAUtil.java)
+Hibernate maps the entity to the Student database table.
 
-Create JPAUtil.java to create the EntityManagerFactory and provide an EntityManager for database operations.
+4. Configure JPA and Hibernate
 
-The persistence unit used in this project is:
+Create:
+
+src/main/resources/META-INF/persistence.xml
+
+This configuration file defines the persistence unit and database connection.
+
+The persistence unit used by the application is:
 
 studentPU
 
-5. Persistence Configuration (persistence.xml)
-
-Create persistence.xml inside src/main/resources/META-INF/ to configure JPA, Hibernate, the MySQL connection, and database properties.
-
-The configuration includes:
-
-Persistence unit name
+It configures:
 
 Hibernate persistence provider
 
@@ -109,63 +217,47 @@ MySQL JDBC driver
 
 Database URL
 
-MySQL username
+Database username
 
-MySQL password
+Database password
 
-Hibernate database configuration
+Hibernate schema management
 
-6. Data Access Object (StudentDAO.java)
+5. Create JPA Utility
 
-Create StudentDAO.java to implement all Create, Read, Update, and Delete operations using EntityManager and transactions.
+JPAUtil.java creates the EntityManagerFactory using the studentPU persistence unit.
 
-Create
+It also provides an EntityManager whenever database operations are required.
 
-A new student is added using:
+6. Implement CRUD Operations
+
+StudentDAO.java contains the database operations.
+
+CREATE
 
 entityManager.persist(student);
 
-Read
+Adds a new student to the database.
 
-Student details are retrieved using:
+READ
 
 entityManager.find(Student.class, studentId);
 
-Update
+Retrieves a student using the Student ID.
 
-The existing student is retrieved, its details are modified, and the transaction is committed.
+UPDATE
 
-Delete
+The existing managed entity is retrieved, its values are changed, and the transaction is committed.
 
-The student is retrieved and deleted using:
+DELETE
 
 entityManager.remove(student);
 
-7. Main Application (App.java)
+Removes the selected student from the database.
 
-Create App.java to provide the menu-driven console application and accept input from the user using Scanner.
+7. Build the Menu-Driven Application
 
-The menu provides the following options:
-
-====================================
-       STUDENT MANAGEMENT SYSTEM
-====================================
-
-1. Add Student
-2. View Student
-3. Update Student
-4. Delete Student
-5. Exit
-
-Enter your choice:
-
-The selected option calls the corresponding method from StudentDAO.
-
-8. Run and Test the Application
-
-Run the Maven application and verify that Add, View, Update, Delete, and Exit options work correctly.
-
-Main Menu
+App.java provides the console interface.
 
 ====================================
        STUDENT MANAGEMENT SYSTEM
@@ -175,99 +267,55 @@ Main Menu
 3. Update Student
 4. Delete Student
 5. Exit
+
 Enter your choice:
 
-Create – Add Student
+The application reads the user's choice and calls the appropriate StudentDAO method.
 
-Enter Student Name: Rahul
-Enter Email: rahul@gmail.com
-Enter Course: Java
-Enter Phone: 9876543210
+🔄 CRUD Workflow
 
-Student added successfully!
-Student ID: 1
+                 Student Management System
+                           │
+          ┌────────────────┼────────────────┐
+          │                │                │
+       CREATE            READ            UPDATE
+          │                │                │
+      persist()          find()       find() + modify
+          │                │                │
+          └────────────────┼────────────────┘
+                           │
+                        DELETE
+                           │
+                        remove()
+                           │
+                           ▼
+                    MySQL Database
 
-Read – View Student
+🗄️ Database Setup
 
-Enter Student ID: 1
+1. Start MySQL
 
-Student Details
------------------------------
-ID     : 1
-Name   : Rahul
-Email  : rahul@gmail.com
-Course : Java
-Phone  : 9876543210
------------------------------
+Make sure your MySQL Server is running.
 
-Update – Update Student
+2. Create the Database
 
-Enter Student ID: 1
-Enter New Course: Full Stack Java
-Enter New Phone: 9988776655
-
-Student updated successfully!
-
-Delete – Delete Student
-
-Enter Student ID: 1
-
-Student deleted successfully!
-
-Exit
-
-Thank you for using Student Management System!
-Application closed.
-
-9. MySQL Workbench Verification
-
-Open MySQL Workbench and verify that the Student table and records created through JPA and Hibernate are stored correctly.
-
-Create the database if required:
+Open MySQL Workbench and execute:
 
 CREATE DATABASE student_management;
 
-Select the database:
+3. Select the Database
 
 USE student_management;
 
-Verify the Student table:
+Hibernate will create/update the required Student table according to the JPA entity configuration.
 
-SELECT * FROM Student;
+⚙️ Configuration
 
-The student records stored through the application will be displayed in MySQL Workbench.
-
-Core JPA Operations
-
-CREATE  → entityManager.persist()
-
-READ    → entityManager.find()
-
-UPDATE  → Modify managed entity + Transaction
-
-DELETE  → entityManager.remove()
-
-Application Flow
-
-User
-  ↓
-App.java
-  ↓
-StudentDAO
-  ↓
-EntityManager
-  ↓
-Hibernate
-  ↓
-MySQL Database
-
-Database Configuration
-
-The MySQL database connection is configured in:
+Open:
 
 src/main/resources/META-INF/persistence.xml
 
-Example configuration:
+Configure your local MySQL credentials:
 
 <property
     name="jakarta.persistence.jdbc.url"
@@ -281,20 +329,267 @@ Example configuration:
     name="jakarta.persistence.jdbc.password"
     value="YOUR_MYSQL_PASSWORD"/>
 
-Note: Do not commit your actual MySQL password to GitHub.
+⚠️ Security: Never commit your real MySQL password to a public GitHub repository. Use a local configuration or environment-based secret for real projects.
 
-Build the Project
+▶️ Running the Project
 
-Open the terminal inside the project directory and run:
+Prerequisites
+
+Install the following:
+
+Java 17 or later
+
+Maven
+
+MySQL Server
+
+MySQL Workbench
+
+Git
+
+Verify Java:
+
+java -version
+
+Verify Maven:
+
+mvn -version
+
+1. Clone the Repository
+
+git clone https://github.com/vinaybabannavar-create/Student-Management-System.git
+
+Move into the project directory:
+
+cd Student-Management-System
+
+2. Configure MySQL
+
+Create the database:
+
+CREATE DATABASE student_management;
+
+Update the MySQL credentials in:
+
+src/main/resources/META-INF/persistence.xml
+
+3. Compile the Project
+
+Run:
 
 mvn clean compile
 
-A successful compilation displays:
+A successful build should display:
 
 BUILD SUCCESS
 
-Conclusion
+4. Run the Application
 
-The Student Management System successfully demonstrates CRUD operations using JPA with Hibernate and MySQL.
+Run App.java from your IDE.
 
-The project uses EntityManager and transactions to create, read, update, and delete student records.
+The console will display the Student Management System menu.
+
+🖥️ Application Demo
+
+Main Menu
+
+====================================
+       STUDENT MANAGEMENT SYSTEM
+====================================
+1. Add Student
+2. View Student
+3. Update Student
+4. Delete Student
+5. Exit
+Enter your choice:
+
+Create — Add Student
+
+Enter Student Name: Rahul
+Enter Email: rahul@gmail.com
+Enter Course: Java
+Enter Phone: 9876543210
+
+Student added successfully!
+Student ID: 1
+
+Read — View Student
+
+Enter Student ID: 1
+
+Student Details
+-----------------------------
+ID     : 1
+Name   : Rahul
+Email  : rahul@gmail.com
+Course : Java
+Phone  : 9876543210
+-----------------------------
+
+Update — Update Student
+
+Enter Student ID: 1
+Enter New Course: Full Stack Java
+Enter New Phone: 9988776655
+
+Student updated successfully!
+
+Delete — Delete Student
+
+Enter Student ID: 1
+
+Student deleted successfully!
+
+Exit
+
+Thank you for using Student Management System!
+Application closed.
+
+🔎 MySQL Workbench Verification
+
+After performing CRUD operations, verify the records directly in MySQL Workbench.
+
+USE student_management;
+
+SELECT * FROM Student;
+
+The records created or modified through the Java application will be reflected in the Student table.
+
+🔑 Core JPA Operations
+
+Operation
+
+JPA Operation
+
+CREATE
+
+entityManager.persist()
+
+READ
+
+entityManager.find()
+
+UPDATE
+
+Modify managed entity + Transaction
+
+DELETE
+
+entityManager.remove()
+
+🧩 Key JPA Concepts Demonstrated
+
+Entity Mapping
+
+@Entity maps the Java class to a database table.
+
+Primary Key
+
+@Id identifies the primary key.
+
+Auto-Generated ID
+
+@GeneratedValue(strategy = GenerationType.IDENTITY) allows MySQL to generate the Student ID.
+
+EntityManager
+
+EntityManager performs persistence operations between Java objects and the database.
+
+Transactions
+
+Transactions ensure that database changes are committed safely.
+
+ORM
+
+Hibernate maps Java objects to relational database records, reducing the need for manual SQL for CRUD operations.
+
+📌 Expected Database Table
+
+The application creates a table similar to:
+
+Student
+├── studentId
+├── studentName
+├── email
+├── course
+└── phoneNumber
+
+🧪 Testing
+
+The project includes a test source directory under:
+
+src/test/java/com/studentmanagement/
+
+Maven can be used to execute tests:
+
+mvn test
+
+📂 Important Files
+
+File
+
+Responsibility
+
+App.java
+
+Main menu and user interaction
+
+Student.java
+
+JPA entity representing a student
+
+StudentDAO.java
+
+CRUD database operations
+
+JPAUtil.java
+
+EntityManagerFactory and EntityManager creation
+
+persistence.xml
+
+JPA/Hibernate and MySQL configuration
+
+pom.xml
+
+Maven dependencies and build configuration
+
+.gitignore
+
+Prevents generated/unwanted files from being committed
+
+🚀 Learning Outcomes
+
+This project demonstrates practical understanding of:
+
+Java application development
+
+Maven project management
+
+Jakarta Persistence (JPA)
+
+Hibernate ORM
+
+Entity mapping
+
+EntityManager
+
+Database transactions
+
+CRUD operations
+
+MySQL integration
+
+Maven build lifecycle
+
+Git and GitHub project management
+
+👨‍💻 Author
+
+Vinay Babannavar
+
+GitHub: @vinaybabannavar-create
+
+📄 License
+
+This project is created for educational and lab assignment purposes.
