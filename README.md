@@ -89,9 +89,9 @@ Database operations
 Transactions
 
 Data consistency
+## 📁 Project Structure
 
-📁 Project Structure
-
+```text
 Student-Management-System/
 │
 ├── .mvn/
@@ -121,40 +121,35 @@ Student-Management-System/
 ├── .gitignore
 ├── pom.xml
 └── README.md
+```
 
-🏗️ Application Architecture
+## 🏗️ Application Architecture
 
 The application follows a simple layered structure:
 
-┌───────────────────────────┐
-│          App.java         │
-│   Console / User Input    │
-└─────────────┬─────────────┘
-              │
-              ▼
-┌───────────────────────────┐
-│      StudentDAO.java      │
-│       CRUD Operations     │
-└─────────────┬─────────────┘
-              │
-              ▼
-┌───────────────────────────┐
-│       EntityManager       │
-│      JPA Persistence      │
-└─────────────┬─────────────┘
-              │
-              ▼
-┌───────────────────────────┐
-│     Hibernate ORM         │
-│  JPA Persistence Provider │
-└─────────────┬─────────────┘
-              │
-              ▼
-┌───────────────────────────┐
-│       MySQL Database      │
-│     student_management    │
-└───────────────────────────┘
-
+```text
+User
+  │
+  ▼
+App.java
+(Console / User Input)
+  │
+  ▼
+StudentDAO.java
+(CRUD Operations)
+  │
+  ▼
+EntityManager
+(JPA Persistence)
+  │
+  ▼
+Hibernate ORM
+(JPA Persistence Provider)
+  │
+  ▼
+MySQL Database
+(student_management)
+```
 📚 Step-by-Step Implementation
 
 1. Create the Maven Project
